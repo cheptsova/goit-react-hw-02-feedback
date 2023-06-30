@@ -13,28 +13,10 @@ export class App extends Component {
   };
 
   onLeaveFeedback = stateKey => {
-    if (stateKey === 'good') {
-      this.setState(prevState => ({
-        good: prevState.good + 1,
-      }));
-      return;
-    }
-
-    if (stateKey === 'neutral') {
-      this.setState(prevState => ({
-        neutral: prevState.neutral + 1,
-      }));
-      return;
-    }
-
-    if (stateKey === 'bad') {
-      this.setState(prevState => ({
-        bad: prevState.bad + 1,
-      }));
-      return;
-    }
+    this.setState(prevState => ({
+      [stateKey]: prevState[stateKey] + 1,
+    }));
   };
-
   countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
     return good + bad + neutral;
@@ -46,7 +28,7 @@ export class App extends Component {
     return positiveFeedback;
   };
 
-  render() {
+  renderFeedbackOptions() {
     const { good, neutral, bad } = this.state;
 
     return (
@@ -57,6 +39,15 @@ export class App extends Component {
             onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
+      </div>
+    );
+  }
+
+  renderStatistics() {
+    const { good, neutral, bad } = this.state;
+
+    return (
+      <div className={style.appContainer}>
         <Section title={'Statistics'}>
           {this.countTotalFeedback() ? (
             <Statistics
@@ -71,6 +62,15 @@ export class App extends Component {
           )}
         </Section>
       </div>
+    );
+  }
+
+  render() {
+    return (
+      <>
+        {this.renderFeedbackOptions()}
+        {this.renderStatistics()}
+      </>
     );
   }
 }

@@ -3,29 +3,16 @@ import style from './FeedbackOptions.module.css';
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => (
   <div className={style.feedbackThumb}>
-    <button
-      className={style.feedbackButton}
-      type="button"
-      onClick={() => onLeaveFeedback(options.find(option => option === 'good'))}
-    >
-      Good
-    </button>
-    <button
-      className={style.feedbackButton}
-      type="button"
-      onClick={() =>
-        onLeaveFeedback(options.find(option => option === 'neutral'))
-      }
-    >
-      Neutral
-    </button>
-    <button
-      className={style.feedbackButton}
-      type="button"
-      onClick={() => onLeaveFeedback(options.find(option => option === 'bad'))}
-    >
-      Bad
-    </button>
+    {options.map(option => (
+      <button
+        key={option}
+        className={style.feedbackButton}
+        type="button"
+        onClick={() => onLeaveFeedback(option)}
+      >
+        {option}
+      </button>
+    ))}
   </div>
 );
 
