@@ -29,8 +29,6 @@ export class App extends Component {
   };
 
   renderFeedbackOptions() {
-    const { good, neutral, bad } = this.state;
-
     return (
       <div className={style.appContainer}>
         <Section title={'Please leave feedback'}>
